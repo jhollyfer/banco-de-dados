@@ -1,0 +1,30 @@
+name: cetam
+services:
+  database:
+    image: postgres:16-alpine
+    container_name: cetam-database
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_DATABASE}
+      POSTGRES_USER: ${DB_USERNAME}
+    ports:
+      - "${DB_PORT:-5432}:5432"
+    volumes:
+      - cetam-database-volume:/var/lib/postgresql/data
+    # networks:
+    #   - cetam-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USERNAME} -d ${DB_DATABASE}"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+# networks:
+#   cetam-network:
+#     driver: bridge
+
+volumes:
+  cetam-database-volume:
+    driver: local
