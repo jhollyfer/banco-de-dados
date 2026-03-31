@@ -1,8 +1,8 @@
 -- ============================================
 -- AULA 02 - Tipos de Dados
--- Arquivo 006: Tipos Numericos
+-- Arquivo 00: Tipos Numericos
 -- ============================================
--- Conecte no banco "escola" pelo seu client SQL e execute este arquivo.
+-- Execute com: psql -U seu_usuario -d escola -f aula-02/00_tipos_numericos.sql
 -- ============================================
 
 -- Por que tipos importam?
@@ -16,23 +16,22 @@
 -- Para numeros sem casa decimal: idade, quantidade, ano.
 
 -- No PostgreSQL, as variacoes sao:
--- SMALLINT  → -32.768 a 32.767            (2 bytes)
--- INT       → -2 bilhoes a 2 bilhoes      (4 bytes)
--- BIGINT   → -9 quintilhoes a 9 quintilhoes (8 bytes)
-
--- Nota: PostgreSQL NAO tem TINYINT nem UNSIGNED. Use SMALLINT no lugar.
+-- SMALLINT  -> -32.768 a 32.767            (2 bytes)
+-- INT       -> -2 bilhoes a 2 bilhoes      (4 bytes)
+-- BIGINT    -> -9 quintilhoes a 9 quintilhoes (8 bytes)
 
 CREATE TABLE produtos (
     id                  SERIAL PRIMARY KEY,
+    nome                VARCHAR(100) NOT NULL,
     quantidade_estoque  INT,
     ano_lancamento      SMALLINT,       -- ano cabe em SMALLINT
     visualizacoes       BIGINT          -- pode ser um numero enorme
 );
 
-INSERT INTO produtos (quantidade_estoque, ano_lancamento, visualizacoes) VALUES
-    (150,  2023, 1000000),
-    (0,    2024, 50),
-    (42,   2020, 999999999);
+INSERT INTO produtos (nome, quantidade_estoque, ano_lancamento, visualizacoes) VALUES
+    ('Notebook',  150,  2023, 1000000),
+    ('Mouse',     0,    2024, 50),
+    ('Teclado',   42,   2020, 999999999);
 
 SELECT * FROM produtos;
 
@@ -67,7 +66,14 @@ SELECT nome, preco FROM produtos_precos;
 
 -- Veja o problema na pratica:
 SELECT 0.1::FLOAT + 0.2::FLOAT AS resultado_float;
--- → 0.30000000000000004  (ERRADO!)
+-- -> 0.30000000000000004  (ERRADO!)
 
 SELECT 0.1::DECIMAL + 0.2::DECIMAL AS resultado_decimal;
--- → 0.3  (CORRETO!)
+-- -> 0.3  (CORRETO!)
+
+-- ========================================
+-- TESTE VOCE MESMO
+-- ========================================
+-- 1) Adicione um produto 'Webcam' com estoque 25, ano 2024 e 500 visualizacoes
+-- 2) Adicione um preco para 'Webcam' de R$ 199.90
+-- 3) Faca um SELECT para ver os produtos com estoque > 30

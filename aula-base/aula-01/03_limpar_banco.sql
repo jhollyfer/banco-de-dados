@@ -1,8 +1,8 @@
 -- ============================================
--- AULA 01 - Fundamentos de SQL
--- Arquivo 005: Limpar Banco de Dados
+-- AULA 01 - O que e SQL
+-- Arquivo 03: Limpar Banco de Dados
 -- ============================================
--- Execute com: psql -U seu_usuario -d escola -f 005_limpar_banco.sql
+-- Execute com: psql -U seu_usuario -d escola -f aula-01/03_limpar_banco.sql
 -- ============================================
 
 -- !! CUIDADO !! --
@@ -12,23 +12,17 @@
 -- ----------------------------------------
 -- Deletar tabelas
 -- ----------------------------------------
--- A ORDEM IMPORTA! Precisamos apagar primeiro as tabelas que
--- possuem chaves estrangeiras (matriculas depende de alunos e cursos).
--- Se tentarmos apagar "alunos" primeiro, o banco vai recusar
--- porque "matriculas" ainda faz referencia a ela.
+-- A ORDEM IMPORTA quando ha chaves estrangeiras!
+-- Neste caso nao temos FK, entao qualquer ordem funciona.
 
-DROP TABLE IF EXISTS matriculas;
 DROP TABLE IF EXISTS cursos;
 DROP TABLE IF EXISTS alunos;
 
 -- ----------------------------------------
--- Deletar o banco de dados
+-- Deletar o banco de dados (opcional)
 -- ----------------------------------------
 -- Para apagar o banco inteiro, voce precisa estar conectado
 -- a OUTRO banco (nao pode apagar o banco que esta usando).
 --
 -- Execute no terminal:
 --   psql -U seu_usuario -d postgres -c "DROP DATABASE escola;"
---
--- Ou descomente a linha abaixo e rode este arquivo conectado ao banco "postgres":
--- DROP DATABASE escola;

@@ -1,8 +1,8 @@
 -- ============================================
 -- AULA 02 - Tipos de Dados
--- Arquivo 007: Tipos de Texto
+-- Arquivo 01: Tipos de Texto
 -- ============================================
--- Conecte no banco "escola" pelo seu client SQL e execute este arquivo.
+-- Execute com: psql -U seu_usuario -d escola -f aula-02/01_tipos_texto.sql
 -- ============================================
 
 -- ----------------------------------------
@@ -53,15 +53,15 @@ SELECT titulo, LENGTH(conteudo) AS tamanho_texto FROM postagens;
 -- ----------------------------------------
 -- CHAR(n) vs VARCHAR(n)
 -- ----------------------------------------
--- CHAR(n)    → tamanho FIXO. Sempre ocupa n caracteres (preenche com espacos).
--- VARCHAR(n) → tamanho VARIAVEL. Ocupa so o que precisa.
+-- CHAR(n)    -> tamanho FIXO. Sempre ocupa n caracteres (preenche com espacos).
+-- VARCHAR(n) -> tamanho VARIAVEL. Ocupa so o que precisa.
 
 -- Exemplo: CHAR(10) sempre usa 10 bytes, mesmo para "Ana" (preenche com espacos).
 --          VARCHAR(10) usa apenas 3 bytes para "Ana".
 
 -- Quando usar CHAR? Para codigos de tamanho fixo:
---   UF do estado: CHAR(2) → 'AM', 'SP', 'RJ'
---   Codigo do pais: CHAR(3) → 'BRA', 'USA'
+--   UF do estado: CHAR(2) -> 'AM', 'SP', 'RJ'
+--   Codigo do pais: CHAR(3) -> 'BRA', 'USA'
 
 CREATE TABLE estados (
     sigla  CHAR(2) PRIMARY KEY,  -- sempre 2 caracteres
@@ -74,3 +74,11 @@ INSERT INTO estados (sigla, nome) VALUES
     ('RJ', 'Rio de Janeiro');
 
 SELECT sigla, nome FROM estados;
+
+-- ========================================
+-- TESTE VOCE MESMO
+-- ========================================
+-- 1) Adicione mais 2 contatos na tabela contatos
+-- 2) Crie uma postagem com titulo 'Minha Bio' e conteudo longo
+-- 3) Adicione o estado 'PA' (Para) na tabela estados
+-- 4) Use LENGTH() para ver o tamanho do titulo de cada postagem

@@ -1,8 +1,8 @@
 -- ============================================
 -- AULA 02 - Tipos de Dados
--- Arquivo 008: BOOLEAN e Tipos de Data/Hora
+-- Arquivo 02: BOOLEAN e Tipos de Data/Hora
 -- ============================================
--- Conecte no banco "escola" pelo seu client SQL e execute este arquivo.
+-- Execute com: psql -U seu_usuario -d escola -f aula-02/02_tipos_boolean_data.sql
 -- ============================================
 
 -- ----------------------------------------
@@ -25,11 +25,11 @@ INSERT INTO usuarios (nome, ativo) VALUES
 
 -- Buscar apenas usuarios ativos
 SELECT nome FROM usuarios WHERE ativo = TRUE;
--- → Ana, Julia
+-- -> Ana, Julia
 
 -- Buscar inativos
 SELECT nome FROM usuarios WHERE ativo = FALSE;
--- → Carlos
+-- -> Carlos
 
 -- No PostgreSQL, voce pode simplificar:
 SELECT nome FROM usuarios WHERE ativo;       -- mesmo que ativo = TRUE
@@ -101,3 +101,12 @@ SELECT
     data_evento,
     CURRENT_DATE - data_evento AS dias_atras
 FROM eventos;
+
+-- ========================================
+-- TESTE VOCE MESMO
+-- ========================================
+-- 1) Adicione um usuario 'Pedro' com ativo = FALSE
+-- 2) Busque todos os usuarios ativos
+-- 3) Adicione um evento 'Seminario' para '2024-07-20'
+-- 4) Use EXTRACT para pegar o mes de cada evento
+-- 5) Calcule quantos dias faltam para a formatura

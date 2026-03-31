@@ -1,9 +1,9 @@
 -- ============================================
 -- AULA 03 - Criando Tabelas
--- Arquivo 012: ALTER TABLE e DROP TABLE
+-- Arquivo 02: ALTER TABLE e DROP TABLE
 -- ============================================
--- Execute no banco "escola" pelo seu client SQL.
--- Rode DEPOIS do 011 (precisa das tabelas criadas la).
+-- Execute com: psql -U seu_usuario -d escola -f aula-03/02_alter_drop_table.sql
+-- Rode DEPOIS do 01 (precisa das tabelas criadas la).
 -- ============================================
 
 -- ----------------------------------------
@@ -68,3 +68,12 @@ DROP TABLE IF EXISTS alunos;
 SELECT table_name
 FROM information_schema.tables
 WHERE table_schema = 'public';
+
+-- ========================================
+-- TESTE VOCE MESMO
+-- ========================================
+-- Recrie a tabela alunos (simples, com id, nome, email)
+-- 1) Adicione uma coluna 'cidade' VARCHAR(100)
+-- 2) Renomeie 'cidade' para 'municipio'
+-- 3) Remova a coluna 'municipio'
+-- 4) Apague a tabela

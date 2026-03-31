@@ -1,8 +1,8 @@
 -- ============================================
 -- AULA 03 - Criando Tabelas
--- Arquivo 011: Sistema Completo de Escola
+-- Arquivo 01: Sistema Completo de Escola
 -- ============================================
--- Execute no banco "escola" pelo seu client SQL.
+-- Execute com: psql -U seu_usuario -d escola -f aula-03/01_sistema_escola.sql
 -- ============================================
 
 -- Mini sistema com 3 tabelas relacionadas.
@@ -36,8 +36,11 @@ CREATE TABLE cursos (
 );
 
 -- ----------------------------------------
--- Tabela: matriculas (conecta alunos ←→ cursos)
+-- Tabela: matriculas (conecta alunos <-> cursos)
 -- ----------------------------------------
+-- FOREIGN KEY garante que aluno_id e curso_id existam nas tabelas originais.
+-- Se voce tentar inserir um aluno_id que nao existe, o banco RECUSA.
+
 CREATE TABLE matriculas (
     id              SERIAL      PRIMARY KEY,
     aluno_id        INT         NOT NULL,
@@ -50,8 +53,8 @@ CREATE TABLE matriculas (
 );
 
 -- Relacao:
--- alunos.id  ←──  matriculas.aluno_id
--- cursos.id  ←──  matriculas.curso_id
+-- alunos.id  <--  matriculas.aluno_id
+-- cursos.id  <--  matriculas.curso_id
 
 -- ----------------------------------------
 -- Inserindo dados
@@ -78,8 +81,6 @@ INSERT INTO matriculas (aluno_id, curso_id) VALUES
 -- Verificando a estrutura (PostgreSQL)
 -- ----------------------------------------
 
--- No PostgreSQL, usamos estas consultas no lugar de DESCRIBE e SHOW TABLES:
-
 -- Ver colunas de uma tabela (equivalente ao DESCRIBE do MySQL):
 SELECT column_name, data_type, is_nullable, column_default
 FROM information_schema.columns
@@ -105,3 +106,10 @@ SELECT
 FROM matriculas m
 JOIN alunos a ON m.aluno_id = a.id
 JOIN cursos c ON m.curso_id = c.id;
+
+-- ========================================
+-- TESTE VOCE MESMO
+-- ========================================
+-- 1) Adicione um 4o aluno e matricule-o em 'Redes'
+-- 2) Tente inserir uma matricula com aluno_id = 999. O que acontece?
+-- 3) Use information_schema para ver as colunas da tabela cursos

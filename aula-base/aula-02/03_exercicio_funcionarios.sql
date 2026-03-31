@@ -1,23 +1,23 @@
 -- ============================================
 -- AULA 02 - Tipos de Dados
--- Arquivo 009: Exercicio - Tabela Completa
+-- Arquivo 03: Exercicio - Tabela Completa
 -- ============================================
--- Conecte no banco "escola" pelo seu client SQL e execute este arquivo.
+-- Execute com: psql -U seu_usuario -d escola -f aula-02/03_exercicio_funcionarios.sql
 -- ============================================
 
 -- Exercicio da aula: criar uma tabela "funcionarios"
 -- usando pelo menos 6 tipos diferentes.
 
 -- Resumo dos tipos usados:
--- SERIAL       → id auto-incrementado
--- VARCHAR(n)   → texto com limite (nome, email, cpf)
--- DECIMAL(p,s) → numero com casas decimais (salario)
--- INT          → numero inteiro (numero de filhos)
--- BOOLEAN      → verdadeiro/falso (ativo)
--- TEXT         → texto longo (biografia)
--- DATE         → data (admissao, nascimento)
--- TIMESTAMP    → data + hora (criado_em)
--- CHAR(n)      → texto fixo (UF do estado)
+-- SERIAL       -> id auto-incrementado
+-- VARCHAR(n)   -> texto com limite (nome, email, cpf)
+-- DECIMAL(p,s) -> numero com casas decimais (salario)
+-- INT          -> numero inteiro (numero de filhos)
+-- BOOLEAN      -> verdadeiro/falso (ativo)
+-- TEXT         -> texto longo (biografia)
+-- DATE         -> data (admissao, nascimento)
+-- TIMESTAMP    -> data + hora (criado_em)
+-- CHAR(n)      -> texto fixo (UF do estado)
 
 CREATE TABLE funcionarios (
     id              SERIAL          PRIMARY KEY,
@@ -64,13 +64,21 @@ SELECT nome, salario FROM funcionarios WHERE ativo;
 SELECT nome, TO_CHAR(salario, 'R$ 999,999.99') AS salario_formatado
 FROM funcionarios;
 
--- Funcionarios com mais de 1 filho
+-- Funcionarios com filhos
 SELECT nome, numero_filhos FROM funcionarios
 WHERE numero_filhos > 0;
 
 -- Funcionarios do Amazonas admitidos depois de 2020
 SELECT nome, data_admissao FROM funcionarios
 WHERE uf = 'AM' AND data_admissao >= '2020-01-01';
+
+-- ========================================
+-- TESTE VOCE MESMO
+-- ========================================
+-- 1) Adicione 2 novos funcionarios com dados completos
+-- 2) Busque funcionarios com salario acima de 5000
+-- 3) Busque funcionarios ativos do estado 'AM'
+-- 4) Use EXTRACT para mostrar o ano de admissao de cada funcionario
 
 -- ----------------------------------------
 -- Limpeza (opcional)

@@ -1,8 +1,8 @@
 -- ============================================
--- AULA 01 - Fundamentos de SQL
--- Arquivo 000: Criar o Banco de Dados
+-- AULA 01 - O que e SQL
+-- Arquivo 00: Criar o Banco de Dados
 -- ============================================
--- Execute com: psql -U seu_usuario -f 000_criar_banco.sql
+-- Execute com: psql -U seu_usuario -f aula-01/00_criar_banco.sql
 -- ============================================
 
 -- Um banco de dados e como um arquivo de escritorio grande.
@@ -16,6 +16,5 @@
 CREATE DATABASE escola;
 
 -- Pronto! Agora o banco "escola" existe.
--- Os proximos arquivos (001 em diante) devem ser executados
--- conectado a esse banco:
---   psql -U seu_usuario -d escola -f 001_criar_tabelas.sql
+-- Os proximos arquivos devem ser executados conectado a esse banco:
+--   psql -U seu_usuario -d escola -f aula-01/01_criar_tabelas_simples.sql

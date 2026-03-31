@@ -1,8 +1,8 @@
 -- ============================================
 -- AULA 03 - Criando Tabelas
--- Arquivo 013: Exercicio - Sistema de Biblioteca
+-- Arquivo 03: Exercicio - Sistema de Biblioteca
 -- ============================================
--- Execute no banco "escola" pelo seu client SQL.
+-- Execute com: psql -U seu_usuario -d escola -f aula-03/03_exercicio_biblioteca.sql
 -- ============================================
 
 -- Exercicio: criar um mini sistema de biblioteca
@@ -12,13 +12,13 @@
 -- Tabela: livros
 -- ----------------------------------------
 CREATE TABLE livros (
-    id          SERIAL          PRIMARY KEY,
-    titulo      VARCHAR(200)    NOT NULL,
-    autor       VARCHAR(100)    NOT NULL,
-    isbn        CHAR(13)        UNIQUE,         -- ISBN tem 13 digitos fixos
+    id             SERIAL          PRIMARY KEY,
+    titulo         VARCHAR(200)    NOT NULL,
+    autor          VARCHAR(100)    NOT NULL,
+    isbn           CHAR(13)        UNIQUE,         -- ISBN tem 13 digitos fixos
     ano_publicacao INT,
-    disponivel  BOOLEAN         DEFAULT TRUE,
-    criado_em   TIMESTAMP       DEFAULT CURRENT_TIMESTAMP
+    disponivel     BOOLEAN         DEFAULT TRUE,
+    criado_em      TIMESTAMP       DEFAULT CURRENT_TIMESTAMP
 );
 
 -- ----------------------------------------
@@ -34,7 +34,7 @@ CREATE TABLE leitores (
 );
 
 -- ----------------------------------------
--- Tabela: emprestimos (conecta livros ←→ leitores)
+-- Tabela: emprestimos (conecta livros <-> leitores)
 -- ----------------------------------------
 CREATE TABLE emprestimos (
     id              SERIAL      PRIMARY KEY,
@@ -53,10 +53,10 @@ CREATE TABLE emprestimos (
 -- ----------------------------------------
 
 INSERT INTO livros (titulo, autor, isbn, ano_publicacao) VALUES
-    ('O Senhor dos Aneis',    'J.R.R. Tolkien',       '9780261103252', 1954),
-    ('Clean Code',            'Robert C. Martin',      '9780132350884', 2008),
+    ('O Senhor dos Aneis',    'J.R.R. Tolkien',          '9780261103252', 1954),
+    ('Clean Code',            'Robert C. Martin',         '9780132350884', 2008),
     ('O Pequeno Principe',    'Antoine de Saint-Exupery', '9780156012195', 1943),
-    ('Banco de Dados',        'Abraham Silberschatz',  '9780078022159', 2019);
+    ('Banco de Dados',        'Abraham Silberschatz',     '9780078022159', 2019);
 
 INSERT INTO leitores (nome, email, telefone) VALUES
     ('Marcos Souza',  'marcos@email.com',  '92 99999-1001'),
@@ -105,3 +105,11 @@ SELECT
 FROM emprestimos e
 JOIN leitores le ON e.leitor_id = le.id
 GROUP BY le.nome;
+
+-- ========================================
+-- TESTE VOCE MESMO
+-- ========================================
+-- 1) Adicione mais 2 livros na tabela
+-- 2) O Rafael pegou emprestado o livro 'Banco de Dados' - insira esse emprestimo
+-- 3) Marque o emprestimo do Clean Code como devolvido
+-- 4) Liste todos os emprestimos ativos com os nomes dos livros e leitores

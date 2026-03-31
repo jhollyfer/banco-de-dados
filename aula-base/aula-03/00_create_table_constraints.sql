@@ -1,8 +1,8 @@
 -- ============================================
 -- AULA 03 - Criando Tabelas
--- Arquivo 010: CREATE TABLE e Constraints
+-- Arquivo 00: CREATE TABLE e Constraints
 -- ============================================
--- Execute no banco "escola" pelo seu client SQL.
+-- Execute com: psql -U seu_usuario -d escola -f aula-03/00_create_table_constraints.sql
 -- ============================================
 
 -- CREATE TABLE define a estrutura de uma tabela:
@@ -31,10 +31,10 @@ CREATE TABLE alunos (
 -- O banco gera o valor automaticamente (1, 2, 3...).
 
 INSERT INTO alunos (nome, email) VALUES ('Ana', 'ana@email.com');
--- → id = 1 (automatico)
+-- -> id = 1 (automatico)
 
 INSERT INTO alunos (nome, email) VALUES ('Carlos', 'carlos@email.com');
--- → id = 2 (automatico)
+-- -> id = 2 (automatico)
 
 -- Se deletar o registro 2 e inserir outro, o proximo sera 3 (nao reutiliza).
 
@@ -70,8 +70,11 @@ INSERT INTO alunos (nome, email) VALUES ('Pedro', 'pedro@email.com');
 -- Verificar que ativo=TRUE e criado_em foram preenchidos sozinhos:
 SELECT nome, ativo, criado_em FROM alunos WHERE nome = 'Pedro';
 
--- Mas se tentar explicitamente inserir NULL num campo NOT NULL DEFAULT, falha:
--- INSERT INTO alunos (nome, email, ativo) VALUES (NULL, 'x@email.com', TRUE);
--- ERRO: null value in column "nome" violates not-null constraint
-
 SELECT * FROM alunos;
+
+-- ========================================
+-- TESTE VOCE MESMO
+-- ========================================
+-- 1) Tente inserir um aluno sem nome. O que acontece?
+-- 2) Tente inserir um aluno com email 'ana@email.com'. O que acontece?
+-- 3) Insira um aluno sem informar data_nascimento. Funciona?
